@@ -1,0 +1,12 @@
+pandas
+numpy
+torch
+transformers
+scipy
+language-tool-python
+xgboost
+scikit-learn
+matplotlib
+seaborn
+tqdm
+datasets
