@@ -14,7 +14,7 @@ from datetime import datetime
 
 def save_results_to_txt(results_dict, experiment_name, filename_prefix="experiment_results"):
     """
-    将实验结果保存为 TXT 文件
+    将实验结果保存为TXT文件
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
@@ -57,7 +57,7 @@ def run_experiment_attack():
         "energy_ratio", "p_mean", "p_var", "p_skew", "p_kurt", 
         "spec_flatness", "autocorr_1", "psd_max", "psd_mean"
     ]
-    # CoEdit 模式：1维 ROUGE-2 相似度
+    # CoEdit模式：1维ROUGE-2相似度
     gram_cols = ["rouge2_similarity"]
     
     clf = AITextClassifier(grammar_mode='coedit')
@@ -87,14 +87,14 @@ def run_experiment_attack():
         results[source] = {'Accuracy': metrics['accuracy'], 'F1': metrics['f1']}
         print(f"[{source}] Acc: {metrics['accuracy']:.4f}, F1: {metrics['f1']:.4f}")
 
-    # 保存结果到 TXT
+    # 保存结果到TXT
     save_results_to_txt(results, "Paraphrase Attack Detection", "paraphrase_attack")
     
-    # 按 Normal/Paraphrase 分组画图
+    # 按Normal/Paraphrase分组画图
     normal_sources = [s for s in sources if 'Normal' in s]
     para_sources = [s for s in sources if 'Paraphrase' in s]
     
-    # 只取有配对的数据（Normal + Paraphrase 成对出现）
+    # 只取有配对的数据（Normal+Paraphrase成对出现）
     paired_models = []
     for normal in normal_sources:
         model_name = normal.replace('_Normal', '')

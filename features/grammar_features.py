@@ -1,9 +1,6 @@
 """
 Grammar Feature Extractor for AI Text Detection
 
-支持两种模式:
-1. statistical: 使用language_tool_python统计语法错误（7维特征，快速免费）
-2. coedit: 使用CoEdit模型修正+ROUGE-2相似度（1维特征，与开题报告对齐）
 """
 import os
 import re
@@ -94,22 +91,22 @@ class CoEditModel:
             abs_path = os.path.abspath(self.model_path)
             print(f"正在加载CoEdit模型: {abs_path}...")
             
-            # 1. 验证 spiece.model 文件是否存在
+            # 1. 验证spiece.model文件是否存在
             sp_model_path = os.path.join(abs_path, "spiece.model")
             if not os.path.exists(sp_model_path):
-                print(f"错误: spiece.model 不存在于 {abs_path}")
+                print(f"错误: spiece.model不存在于 {abs_path}")
                 self.model = None
                 return
             
-            # 2. 手动加载 SentencePiece 模型，验证其可用性
+            # 2. 手动加载SentencePiece模型
             sp = spm.SentencePieceProcessor()
             sp.Load(sp_model_path)
-            print(f"SentencePiece 加载成功，词汇表大小: {sp.GetPieceSize()}")
+            print(f"SentencePiece加载成功，词汇表大小: {sp.GetPieceSize()}")
             
-            # 3. 加载 T5Tokenizer
+            # 3. 加载T5Tokenizer
             self.tokenizer = T5Tokenizer.from_pretrained(abs_path)
             
-            # 4. 关键步骤：强制替换 tokenizer 内部的 sentencepiece 模型
+            # 4. 关键步骤：强制替换tokenizer内部的sentencepiece模型
             self.tokenizer.sp_model = sp
             self.tokenizer.sp_model.Load(sp_model_path)
             

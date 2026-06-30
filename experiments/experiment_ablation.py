@@ -15,7 +15,7 @@ from datetime import datetime
 
 def save_results_to_txt(results_dict, experiment_name, filename_prefix="experiment_results"):
     """
-    将实验结果保存为 TXT 文件
+    将实验结果保存为TXT文件
     
     Args:
         results_dict: 包含实验结果的字典
@@ -109,14 +109,14 @@ def run_experiment_1():
     plt.savefig("results/figures/roc_curve_llms.png")
     plt.close()
     
-    # 保存结果到 TXT
+    # 保存结果到TXT
     save_results_to_txt(results_dict, "Ablation Study - LLM Data", "ablation_llms")
     
     print("\nExperiment 1 complete. Figures saved to results/figures/")
 
 
 def run_experiment_hc3():
-    """在 HC3 数据集上运行消融实验"""
+    """在HC3数据集上运行消融实验"""
     print("\n" + "=" * 60)
     print("Running Experiment 1b: Ablation Study on HC3 Data")
     print("=" * 60)
@@ -173,7 +173,7 @@ def run_experiment_hc3():
     plt.savefig("results/figures/roc_curve_hc3.png")
     plt.close()
     
-    # 保存结果到 TXT
+    # 保存结果到TXT
     save_results_to_txt(results_dict, "Ablation Study - HC3 Data", "ablation_hc3")
     
     print("\nExperiment 1b complete. Figures saved to results/figures/")

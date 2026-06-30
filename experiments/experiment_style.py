@@ -18,7 +18,7 @@ from datetime import datetime
 
 def save_results_to_txt(results_dict, experiment_name, filename_prefix="experiment_results"):
     """
-    将实验结果保存为 TXT 文件
+    将实验结果保存为TXT文件
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
@@ -57,7 +57,7 @@ def run_experiment_style():
     
     features_list = []
     
-    # 使用 CoEdit 模式（1维 ROUGE-2）
+    # 使用CoEdit模式（1维ROUGE-2）
     spec_ext = SpectralFeatureExtractor(model_name="local_models/gpt2")
     gram_ext = CoEditGrammarExtractor(model_path="local_models/coedit", use_cache=True)
     
@@ -79,7 +79,7 @@ def run_experiment_style():
     if hasattr(gram_ext, 'close'):
         gram_ext.close()
     
-    # 14维频谱特征 + 1维 CoEdit 语法特征
+    # 14维频谱特征+1维CoEdit语法特征
     spec_cols = [
         "low_freq_energy", "high_freq_energy", "spec_entropy", "avg_amp", "peak_freq",
         "energy_ratio", "p_mean", "p_var", "p_skew", "p_kurt", 
@@ -115,7 +115,7 @@ def run_experiment_style():
         results[style] = {'Accuracy': metrics['accuracy'], 'F1': metrics['f1']}
         print(f"[{style}] Acc: {metrics['accuracy']:.4f}, F1: {metrics['f1']:.4f}")
 
-    # 保存结果到 TXT
+    # 保存结果到TXT
     save_results_to_txt(results, "Style Generalization (Writing vs XSum)", "style_comparison")
 
     # Plot

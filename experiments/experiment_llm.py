@@ -15,7 +15,7 @@ from datetime import datetime
 
 def save_results_to_txt(results_dict, experiment_name, filename_prefix="experiment_results"):
     """
-    将实验结果保存为 TXT 文件
+    将实验结果保存为TXT文件
     
     Args:
         results_dict: 包含实验结果的字典
@@ -24,11 +24,11 @@ def save_results_to_txt(results_dict, experiment_name, filename_prefix="experime
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # 创建 results 目录
+    # 创建results目录
     results_dir = Path("results")
     results_dir.mkdir(exist_ok=True)
     
-    # 保存为 TXT
+    # 保存为TXT
     txt_path = results_dir / f"{filename_prefix}_{timestamp}.txt"
     
     with open(txt_path, 'w', encoding='utf-8') as f:
@@ -68,7 +68,7 @@ def run_experiment_llms():
         "energy_ratio", "p_mean", "p_var", "p_skew", "p_kurt", 
         "spec_flatness", "autocorr_1", "psd_max", "psd_mean"
     ]
-    # CoEdit 模式：1维 ROUGE-2 相似度
+    # CoEdit模式：1维ROUGE-2相似度
     gram_cols = ["rouge2_similarity"]
     
     df_train = all_data[all_data['source'].isin(train_sources)].copy()
@@ -112,7 +112,7 @@ def run_experiment_llms():
             }
             print(f"[{split_name}][{llm}] Acc: {metrics['accuracy']:.4f}, F1: {metrics['f1']:.4f}")
 
-    # 保存结果到 TXT
+    # 保存结果到TXT
     save_results_to_txt(results, "Different LLMs Detection", "llm_comparison")
 
     # Plotting

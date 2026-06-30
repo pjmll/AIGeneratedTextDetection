@@ -49,7 +49,7 @@ class SpectralFeatureExtractor:
         # 频域特征
         avg_amp = np.mean(half_amps)
 
-        # 按 30%/70% 划分低频/高频
+        # 按30%/70%划分低频/高频
         split_point = max(1, int(n_half * 0.3))
         low_freq_energy = np.mean(half_amps[:split_point]**2) if split_point > 0 else 0.0
         high_freq_energy = np.mean(half_amps[split_point:]**2) if split_point < n_half else 0.0
